@@ -1,12 +1,13 @@
 <script setup lang="ts">
-import Showcase from './components/Showcase.vue';
+import { RouterView } from 'vue-router'
+import { Toaster } from '@/components/ui/sonner'
 </script>
 
-
 <template>
-  <main>
-    <Showcase />
-  </main>
+  <div id="app">
+    <Toaster />
+    <RouterView />
+  </div>
 </template>
 
 

@@ -121,3 +121,68 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Markdown content styling for MarkdownPreview component */
+.markdown-content h1 {
+  @apply text-2xl font-bold text-primary border-b border-border pb-2 mb-4;
+}
+
+.markdown-content h2 {
+  @apply text-xl font-semibold text-primary border-b border-muted-foreground/30 pb-1 mb-3 mt-6;
+}
+
+.markdown-content h3 {
+  @apply text-lg font-semibold text-foreground mb-2 mt-4;
+}
+
+.markdown-content h4 {
+  @apply text-base font-semibold text-foreground mb-2 mt-3;
+}
+
+.markdown-content p {
+  @apply text-foreground mb-3 leading-relaxed;
+}
+
+.markdown-content ul {
+  @apply text-foreground mb-3 pl-4;
+}
+
+.markdown-content li {
+  @apply mb-1;
+}
+
+.markdown-content strong {
+  @apply font-semibold text-foreground;
+}
+
+.markdown-content a {
+  @apply text-primary hover:underline;
+}
+
+.markdown-content code {
+  @apply bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-foreground;
+}
+
+.markdown-content hr {
+  @apply border-border my-6;
+}
+
+.markdown-content table {
+  @apply w-full border-collapse border border-border mb-4;
+}
+
+.markdown-content th {
+  @apply border border-border px-3 py-2 bg-muted font-semibold text-left;
+}
+
+.markdown-content td {
+  @apply border border-border px-3 py-2;
+}
+
+.markdown-content tr:nth-child(even) {
+  @apply bg-muted/50;
+}
+
+.markdown-content blockquote {
+  @apply border-l-4 border-primary/30 pl-4 italic text-muted-foreground;
+}

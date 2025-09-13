@@ -1,0 +1,212 @@
+{
+  "repos": [
+    { "projectKey": "MBCS", "slug": "core-services" },
+    { "projectKey": "MBCS", "slug": "common" },
+    { "projectKey": "MBBO", "slug": "backoffice" },
+    { "projectKey": "MBOS", "slug": "online-services" }
+
+  ],
+  "defaultReleaseBranch": "release/2025-09",
+  "sampleReport": {
+    "releaseBranch": "release/2025-09",
+    "from": "2025-08-20T00:00:00.000Z",
+    "to": "2025-09-13T23:59:59.999Z",
+    "generatedAt": "2025-09-13T15:30:45.123Z",
+    "stories": [
+      {
+        "issue": {
+          "key": "MBCS-1001",
+          "summary": "Implement centralized configuration management service",
+          "status": "Done",
+          "assignee": "John Smith",
+          "url": "https://jira.company.com/browse/MBCS-1001",
+          "relatedEpics": [
+            {
+              "key": "MBCS-EP-01",
+              "summary": "Core Services Infrastructure Enhancement",
+              "url": "https://jira.company.com/browse/MBCS-EP-01",
+              "relationship": "Epic Link"
+            }
+          ]
+        },
+        "repo": { "projectKey": "MBCS", "slug": "core-services" },
+        "sourceBranches": ["feature/MBCS-1001-config-service"],
+        "pullRequests": [
+          {
+            "id": 147,
+            "title": "MBCS-1001: Add centralized config management with Redis backend",
+            "sourceBranch": "feature/MBCS-1001-config-service",
+            "targetBranch": "release/2025-09",
+            "mergedAt": "2025-09-10T14:22:33.000Z",
+            "mergedBy": "jane.doe@company.com",
+            "url": "https://bitbucket.company.com/projects/MBCS/repos/core-services/pull-requests/147"
+          }
+        ]
+      },
+      {
+        "issue": {
+          "key": "MBCS-1002",
+          "summary": "Add unified logging framework across all services",
+          "status": "In QA",
+          "assignee": "Sarah Johnson",
+          "url": "https://jira.company.com/browse/MBCS-1002",
+          "relatedEpics": [
+            {
+              "key": "MBCS-EP-01",
+              "summary": "Core Services Infrastructure Enhancement",
+              "url": "https://jira.company.com/browse/MBCS-EP-01",
+              "relationship": "Epic Link"
+            }
+          ]
+        },
+        "repo": { "projectKey": "MBCS", "slug": "core-services" },
+        "sourceBranches": ["feature/MBCS-1002-unified-logging"],
+        "pullRequests": [
+          {
+            "id": 258,
+            "title": "MBCS-1002: Implement structured logging with correlation IDs",
+            "sourceBranch": "feature/MBCS-1002-unified-logging",
+            "targetBranch": "release/2025-09",
+            "mergedAt": "2025-09-08T09:15:22.000Z",
+            "mergedBy": "michael.chen@company.com",
+            "url": "https://bitbucket.company.com/projects/MBCS/repos/core-services/pull-requests/258"
+          }
+        ]
+      },
+      {
+        "issue": {
+          "key": "MBCS-2001",
+          "summary": "Create shared utility library for common business logic",
+          "status": "Done",
+          "assignee": "David Wilson",
+          "url": "https://jira.company.com/browse/MBCS-2001",
+          "relatedEpics": [
+            {
+              "key": "MBCS-EP-02",
+              "summary": "Common Library Standardization",
+              "url": "https://jira.company.com/browse/MBCS-EP-02",
+              "relationship": "Epic Link"
+            }
+          ]
+        },
+        "repo": { "projectKey": "MBCS", "slug": "common" },
+        "sourceBranches": ["feature/MBCS-2001-business-utils"],
+        "pullRequests": [
+          {
+            "id": 189,
+            "title": "MBCS-2001: Add common business logic utilities package",
+            "sourceBranch": "feature/MBCS-2001-business-utils",
+            "targetBranch": "release/2025-09",
+            "mergedAt": "2025-09-12T16:45:11.000Z",
+            "mergedBy": "anna.lopez@company.com",
+            "url": "https://bitbucket.company.com/projects/MBCS/repos/common/pull-requests/189"
+          }
+        ]
+      },
+      {
+        "issue": {
+          "key": "MBBO-3001",
+          "summary": "Enhance backoffice dashboard with real-time metrics",
+          "status": "In Progress",
+          "assignee": "Emily Davis",
+          "url": "https://jira.company.com/browse/MBBO-3001",
+          "relatedEpics": [
+            {
+              "key": "MBBO-EP-01",
+              "summary": "Backoffice User Experience Improvements",
+              "url": "https://jira.company.com/browse/MBBO-EP-01",
+              "relationship": "Epic Link"
+            }
+          ]
+        },
+        "repo": { "projectKey": "MBBO", "slug": "backoffice" },
+        "sourceBranches": ["feature/MBBO-3001-dashboard-metrics"],
+        "pullRequests": [
+          {
+            "id": 301,
+            "title": "MBBO-3001: Add real-time metrics to backoffice dashboard",
+            "sourceBranch": "feature/MBBO-3001-dashboard-metrics",
+            "targetBranch": "release/2025-09",
+            "mergedAt": "2025-09-11T11:30:45.000Z",
+            "mergedBy": "robert.taylor@company.com",
+            "url": "https://bitbucket.company.com/projects/MBBO/repos/backoffice/pull-requests/301"
+          }
+        ]
+      },
+      {
+        "issue": {
+          "key": "MBBO-3002",
+          "summary": "Implement bulk operations for customer data management",
+          "status": "Done",
+          "assignee": "Kevin Brown",
+          "url": "https://jira.company.com/browse/MBBO-3002",
+          "relatedEpics": [
+            {
+              "key": "MBBO-EP-01",
+              "summary": "Backoffice User Experience Improvements",
+              "url": "https://jira.company.com/browse/MBBO-EP-01",
+              "relationship": "Epic Link"
+            }
+          ]
+        },
+        "repo": { "projectKey": "MBBO", "slug": "backoffice" },
+        "sourceBranches": ["feature/MBBO-3002-bulk-operations"],
+        "pullRequests": [
+          {
+            "id": 412,
+            "title": "MBBO-3002: Add bulk operations for customer data processing",
+            "sourceBranch": "feature/MBBO-3002-bulk-operations",
+            "targetBranch": "release/2025-09",
+            "mergedAt": "2025-09-09T13:22:15.000Z",
+            "mergedBy": "lisa.garcia@company.com",
+            "url": "https://bitbucket.company.com/projects/MBBO/repos/backoffice/pull-requests/412"
+          }
+        ]
+      },
+      {
+        "issue": {
+          "key": "MBOS-4001",
+          "summary": "Add mobile-responsive design to online services portal",
+          "status": "In QA",
+          "assignee": "Alex Rodriguez",
+          "url": "https://jira.company.com/browse/MBOS-4001",
+          "relatedEpics": [
+            {
+              "key": "MBOS-EP-01",
+              "summary": "Online Services Platform Modernization",
+              "url": "https://jira.company.com/browse/MBOS-EP-01",
+              "relationship": "Epic Link"
+            }
+          ]
+        },
+        "repo": { "projectKey": "MBOS", "slug": "online-services" },
+        "sourceBranches": ["feature/MBOS-4001-mobile-responsive"],
+        "pullRequests": [
+          {
+            "id": 523,
+            "title": "MBOS-4001: Implement mobile-first responsive design patterns",
+            "sourceBranch": "feature/MBOS-4001-mobile-responsive",
+            "targetBranch": "release/2025-09",
+            "mergedAt": "2025-09-07T14:18:30.000Z",
+            "mergedBy": "jennifer.white@company.com",
+            "url": "https://bitbucket.company.com/projects/MBOS/repos/online-services/pull-requests/523"
+          }
+        ]
+      }
+    ],
+    "summary": {
+      "totalStories": 6,
+      "repoBreakdown": {
+        "MBCS/core-services": 2,
+        "MBCS/common": 1,
+        "MBBO/backoffice": 2,
+        "MBOS/online-services": 1
+      },
+      "statusBreakdown": {
+        "Done": 3,
+        "In QA": 2,
+        "In Progress": 1
+      }
+    }
+  }
+}
