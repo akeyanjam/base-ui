@@ -51,8 +51,8 @@ const handleGenerate = async (criteria: {
     const request = {
       repos: criteria.repos,
       releaseBranch: criteria.releaseBranch,
-      from: criteria.dateRange.start.toDate(getLocalTimeZone()).toISOString(),
-      to: criteria.dateRange.end.toDate(getLocalTimeZone()).toISOString()
+      from: criteria.dateRange.start!.toDate(getLocalTimeZone()).toISOString(),
+      to: criteria.dateRange.end!.toDate(getLocalTimeZone()).toISOString()
     }
     
     // Navigate to results page immediately to show loading
@@ -85,21 +85,20 @@ const handleGenerate = async (criteria: {
   <div class="min-h-screen bg-background">
     <!-- Header Section -->
     <div class="bg-primary text-primary-foreground">
-      <div class="container mx-auto px-6 py-12">
-        <div class="max-w-4xl">
-          <h1 class="text-4xl font-bold mb-4">MBSS Changelog Builder</h1>
-          <h2 class="text-2xl font-light mb-6">Automated Release Report Generation</h2>
-          <p class="text-lg opacity-90 mb-8 leading-relaxed">
-            Generate comprehensive changelog reports by analyzing merged pull requests 
-            and enriching with Jira issue information. Please select the repositories you want to include in the report.
-          </p>
+      <div class="container mx-auto px-6 py-8">
+        <div class="max-w-4xl flex flex-col items-start gap-4">
+          <!-- Logo -->
+          <div class="flex-shrink-0">
+            <img src="/bank-of-america-logo.svg" alt="MBSS Logo" class="h-6 w-auto object-contain" />
+          </div>
           
-          <!-- Status Indicator -->
-          <div class="flex items-center gap-4">
-            <div class="flex items-center gap-2">
-              <div class="flex items-center gap-1">
-                <span class="text-sm opacity-90">{{ store.availableRepos.length }} repositories available</span>
-              </div>
+          <!-- Header Content -->
+          <div class="w-full">
+            <h1 class="text-3xl font-bold mb-2">BofA Point of Sale Changelog Report Builder</h1>
+            
+            <!-- Status Indicator -->
+            <div class="flex items-center gap-2 mt-3">
+              <span class="text-sm opacity-90">{{ store.availableRepos.length }} repositories available</span>
             </div>
           </div>
         </div>
