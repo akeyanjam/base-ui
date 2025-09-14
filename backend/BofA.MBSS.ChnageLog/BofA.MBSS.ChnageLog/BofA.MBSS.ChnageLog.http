@@ -1,0 +1,6 @@
+@BofA.MBSS.ChnageLog_HostAddress = http://localhost:5011
+
+GET {{BofA.MBSS.ChnageLog_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
