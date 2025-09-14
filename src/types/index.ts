@@ -70,7 +70,7 @@ export interface RepoMetadataResponse {
 export interface FormState {
   selectedRepos: RepoRef[]
   releaseBranch: string
-  dateRange: { from: Date, to: Date }
+  dateRange: FormDateRange
 }
 
 export interface ValidationErrors {
@@ -91,7 +91,7 @@ export interface AppState {
   
   // Form state  
   releaseBranch: string
-  dateRange: { from: Date, to: Date }
+  dateRange: FormDateRange
   
   // Report state
   currentReport: BuildReportResponse | null
@@ -106,4 +106,10 @@ export interface AppState {
 export interface DateRangePreset {
   label: string
   days: number
+}
+
+// Date range type for form components (internal use)
+export interface FormDateRange {
+  from: Date
+  to: Date
 }

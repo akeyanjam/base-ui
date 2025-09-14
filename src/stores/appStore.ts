@@ -1,12 +1,13 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import type { 
-  AppState, 
+  // AppState, 
   RepoRef, 
   BuildReportResponse, 
   ValidationErrors, 
   ActiveTab,
-  DateRangePreset 
+  DateRangePreset,
+  FormDateRange
 } from '@/types'
 
 export const useAppStore = defineStore('app', () => {
@@ -17,7 +18,7 @@ export const useAppStore = defineStore('app', () => {
   
   // Form state
   const releaseBranch = ref<string>('')
-  const dateRange = ref<{ from: Date, to: Date }>({
+  const dateRange = ref<FormDateRange>({
     from: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000), // 7 days ago
     to: new Date()
   })

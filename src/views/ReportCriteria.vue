@@ -5,8 +5,8 @@ import { useAppStore } from '@/stores/appStore'
 import { useApi } from '@/composables/useApi'
 import { toast } from 'vue-sonner'
 import ReportCriteria from '@/components/ReportCriteria.vue'
-import type { DateRange } from "reka-ui"
-import { getLocalTimeZone } from "@internationalized/date"
+import type { FormDateRange } from '@/types'
+// import { getLocalTimeZone } from "@internationalized/date"
 
 const router = useRouter()
 const store = useAppStore()
@@ -41,7 +41,7 @@ const loadRepositories = async () => {
 const handleGenerate = async (criteria: {
   repos: any[],
   releaseBranch: string,
-  dateRange: DateRange
+  dateRange: FormDateRange
 }) => {
   store.setIsGenerating(true)
   store.setCurrentReport(null)
@@ -51,8 +51,8 @@ const handleGenerate = async (criteria: {
     const request = {
       repos: criteria.repos,
       releaseBranch: criteria.releaseBranch,
-      from: criteria.dateRange.start!.toDate(getLocalTimeZone()).toISOString(),
-      to: criteria.dateRange.end!.toDate(getLocalTimeZone()).toISOString()
+      from: criteria.dateRange.from.toISOString(),
+      to: criteria.dateRange.to.toISOString()
     }
     
     // Navigate to results page immediately to show loading

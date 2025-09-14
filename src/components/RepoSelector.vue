@@ -187,7 +187,7 @@ const getProjectCheckboxState = (projectKey: string) => {
           </div>
           
           <!-- Repository List -->
-          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 ml-7">
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-2 ml-7">
             <label 
               v-for="repo in repos" 
               :key="`${repo.projectKey}/${repo.slug}`"

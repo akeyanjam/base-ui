@@ -3,7 +3,7 @@ import { computed, ref, watch } from 'vue'
 import { useAppStore } from '@/stores/appStore'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
+// import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ResultsTable from '@/components/ResultsTable.vue'
 import MarkdownPreview from '@/components/MarkdownPreview.vue'
@@ -115,7 +115,7 @@ const handleStartOver = () => {
           <div>
             <h1 class="text-2xl font-bold text-primary">Report Generated Successfully</h1>
             <p class="text-muted-foreground">
-              Found {{ store.currentReport.summary.totalStories }} stories across {{ Object.keys(store.currentReport.summary.repoBreakdown).length }} repositories
+              Found {{ store.currentReport?.summary.totalStories || 0 }} stories across {{ Object.keys(store.currentReport?.summary.repoBreakdown || {}).length }} repositories
             </p>
           </div>
         </div>
@@ -129,15 +129,15 @@ const handleStartOver = () => {
       <!-- Report Details -->
       <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 rounded-lg border border-border bg-muted/30">
         <div class="text-center">
-          <div class="text-2xl font-bold text-primary">{{ store.currentReport.summary.totalStories }}</div>
+          <div class="text-2xl font-bold text-primary">{{ store.currentReport?.summary.totalStories || 0 }}</div>
           <div class="text-sm text-muted-foreground">Total Stories</div>
         </div>
         <div class="text-center">
-          <div class="text-2xl font-bold text-primary">{{ Object.keys(store.currentReport.summary.repoBreakdown).length }}</div>
+          <div class="text-2xl font-bold text-primary">{{ Object.keys(store.currentReport?.summary.repoBreakdown || {}).length }}</div>
           <div class="text-sm text-muted-foreground">Repositories</div>
         </div>
         <div class="text-center">
-          <div class="text-2xl font-bold text-primary">{{ Object.keys(store.currentReport.summary.statusBreakdown).length }}</div>
+          <div class="text-2xl font-bold text-primary">{{ Object.keys(store.currentReport?.summary.statusBreakdown || {}).length }}</div>
           <div class="text-sm text-muted-foreground">Different Statuses</div>
         </div>
       </div>

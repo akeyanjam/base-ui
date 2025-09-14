@@ -13,7 +13,7 @@ import {
   CalendarIcon,
   UserIcon
 } from 'lucide-vue-next'
-import type { StoryInfo } from '@/types'
+// import type { StoryInfo } from '@/types'
 
 const store = useAppStore()
 

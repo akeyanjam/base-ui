@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import RepoSelector from '@/components/RepoSelector.vue'
 import DateRangePicker from '@/components/DateRangePicker.vue'
 import type { DateRange } from "reka-ui"
+import type { FormDateRange } from '@/types'
 import { getLocalTimeZone, today } from "@internationalized/date"
 import { ref } from 'vue'
 
@@ -15,7 +16,7 @@ interface Emits {
   (e: 'generate', criteria: {
     repos: any[],
     releaseBranch: string,
-    dateRange: DateRange
+    dateRange: FormDateRange
   }): void
 }
 
@@ -129,16 +130,29 @@ const handleGenerate = () => {
   }
   
   if (isValid) {
+    // Convert reka-ui DateRange to our FormDateRange type
+    if (!dateRange.value.start || !dateRange.value.end) {
+      store.setValidationError('dateRange', 'Please select a valid date range')
+      return
+    }
+    
+    const convertedDateRange: FormDateRange = {
+      from: dateRange.value.start.toDate(getLocalTimeZone()),
+      to: dateRange.value.end.toDate(getLocalTimeZone())
+    }
+    
     emit('generate', {
       repos: store.selectedRepos,
       releaseBranch: store.releaseBranch,
-      dateRange: dateRange.value
+      dateRange: convertedDateRange
     })
   }
 }
 
 // Initialize date range in store on mount
-handleDateRangeChange(dateRange.value)
+if (dateRange.value.start && dateRange.value.end) {
+  handleDateRangeChange(dateRange.value as any)
+}
 </script>
 
 <template>
@@ -243,7 +257,7 @@ handleDateRangeChange(dateRange.value)
                   Custom Date Range
                 </label>
                 <DateRangePicker 
-                  v-model="dateRange"
+                  :model-value="dateRange as any"
                   @update:model-value="handleDateRangeChange"
                 />
               </div>
