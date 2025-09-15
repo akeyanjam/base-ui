@@ -5,6 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Input } from '@/components/ui/input'
+import { Play } from 'lucide-vue-next'
 import RepoSelector from '@/components/RepoSelector.vue'
 import DateRangePicker from '@/components/DateRangePicker.vue'
 import type { DateRange } from "reka-ui"
@@ -92,6 +93,37 @@ const isFormValid = computed(() => {
          isDateRangeValid.value
 })
 
+// Generate date-based release branch suggestions
+const generateReleaseBranchSuggestions = () => {
+  const now = new Date()
+  const currentYear = now.getFullYear()
+  const currentMonth = now.getMonth() // 0-based (0 = January, 11 = December)
+  
+  const suggestions = []
+  
+  // Past month
+  const pastMonth = currentMonth === 0 ? 11 : currentMonth - 1
+  const pastYear = currentMonth === 0 ? currentYear - 1 : currentYear
+  suggestions.push(`release/${pastYear}-${String(pastMonth + 1).padStart(2, '0')}`)
+  
+  // Current month
+  suggestions.push(`release/${currentYear}-${String(currentMonth + 1).padStart(2, '0')}`)
+  
+  // Next month
+  const nextMonth = currentMonth === 11 ? 0 : currentMonth + 1
+  const nextYear = currentMonth === 11 ? currentYear + 1 : currentYear
+  suggestions.push(`release/${nextYear}-${String(nextMonth + 1).padStart(2, '0')}`)
+  
+  return suggestions
+}
+
+const releaseBranchSuggestions = generateReleaseBranchSuggestions()
+
+// Initialize release branch with current month (middle suggestion) if not already set
+if (!store.releaseBranch) {
+  store.setReleaseBranch(releaseBranchSuggestions[1]) // Current month (middle value)
+}
+
 // Handle form submission
 const handleGenerate = () => {
   // Clear any previous errors
@@ -158,9 +190,20 @@ if (dateRange.value.start && dateRange.value.end) {
 <template>
   <div class="space-y-8">
     <!-- Header -->
-    <div class="text-center space-y-4">
-      <h1 class="text-3xl font-bold text-primary">Generate Changelog Report</h1>
-      <p class="text-muted-foreground max-w-2xl mx-auto">
+    <div class="max-w-6xl mx-auto space-y-4">
+      <div class="flex items-center justify-between">
+        <h1 class="text-3xl font-bold text-primary">Generate Changelog Report</h1>
+        <Button
+          @click="handleGenerate"
+          :disabled="!isFormValid"
+          size="lg"
+          class="h-12 px-6 text-base"
+        >
+          <Play class="w-4 h-4 mr-2" />
+          Generate Report
+        </Button>
+      </div>
+      <p class="text-muted-foreground max-w-2xl">
         Select your repositories, release branch, and date range to generate a comprehensive changelog report
         with Jira issue details and pull request information.
       </p>
@@ -200,20 +243,26 @@ if (dateRange.value.start && dateRange.value.end) {
               </div>
               
               <!-- Quick suggestions -->
-              <div v-if="store.defaultReleaseBranch">
+              <div>
                 <label class="text-sm font-medium text-foreground mb-2 block">
                   Quick Fill
                 </label>
-                <div class="flex gap-2">
+                <div class="flex gap-2 flex-wrap">
                   <Button
+                    v-for="(suggestion, index) in releaseBranchSuggestions"
+                    :key="suggestion"
                     variant="outline"
                     size="sm"
-                    @click="store.setReleaseBranch(store.defaultReleaseBranch)"
+                    @click="store.setReleaseBranch(suggestion)"
                     class="h-8 text-xs"
+                    :class="index === 1 ? 'border-primary text-primary' : ''"
                   >
-                    {{ store.defaultReleaseBranch }}
+                    {{ suggestion }}
                   </Button>
                 </div>
+                <p class="text-xs text-muted-foreground mt-1">
+                  Suggestions based on current date (past, current, next month)
+                </p>
               </div>
               
               <!-- Validation Error -->
@@ -226,10 +275,20 @@ if (dateRange.value.start && dateRange.value.end) {
           <!-- Date Range Selection -->
           <Card>
             <CardHeader>
-              <CardTitle class="text-lg font-semibold">Date Range</CardTitle>
-              <CardDescription>
-                Select the date range for pull request discovery
-              </CardDescription>
+              <div class="flex items-start justify-between">
+                <div>
+                  <CardTitle class="text-lg font-semibold">Date Range</CardTitle>
+                  <CardDescription>
+                    Select the date range for pull request discovery
+                  </CardDescription>
+                </div>
+                <Badge 
+                  :variant="isDateRangeValid ? 'secondary' : 'destructive'" 
+                  class="px-2"
+                >
+                  Duration: {{ dateRangeDays }} days
+                </Badge>
+              </div>
             </CardHeader>
             <CardContent class="space-y-4">
               <!-- Quick Presets -->
@@ -262,22 +321,9 @@ if (dateRange.value.start && dateRange.value.end) {
                 />
               </div>
               
-              <!-- Date Range Info -->
-              <div class="p-3 rounded-md border border-border bg-muted/30">
-                <div class="flex items-center justify-between text-sm">
-                  <span class="text-muted-foreground">Duration:</span>
-                  <Badge 
-                    :variant="isDateRangeValid ? 'secondary' : 'destructive'" 
-                    class="px-2"
-                  >
-                    {{ dateRangeDays }} days
-                  </Badge>
-                </div>
-                
-                <!-- Validation warnings -->
-                <div v-if="dateRangeDays > 90" class="mt-2 p-2 bg-destructive/10 border border-destructive/20 rounded text-xs text-destructive">
-                  ⚠️ Date range exceeds 90-day limit. Please select a shorter period.
-                </div>
+              <!-- Validation warnings -->
+              <div v-if="dateRangeDays > 90" class="p-2 bg-destructive/10 border border-destructive/20 rounded text-xs text-destructive">
+                ⚠️ Date range exceeds 90-day limit. Please select a shorter period.
               </div>
               
               <!-- Validation Error -->
@@ -290,16 +336,5 @@ if (dateRange.value.start && dateRange.value.end) {
       </div>
     </div>
 
-    <!-- Generate Button -->
-    <div class="flex justify-center pt-8">
-      <Button
-        @click="handleGenerate"
-        :disabled="!isFormValid"
-        size="lg"
-        class="h-12 px-12 text-base"
-      >
-        Generate Changelog Report
-      </Button>
-    </div>
   </div>
 </template>
